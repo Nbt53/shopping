@@ -1,15 +1,34 @@
 import { auth } from '@/configs/firebase';
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
+import { onAuthStateChanged } from 'firebase/auth';
 
-const requireAuth = (to: any, from: any, next: any) => {
-  let user = auth.currentUser;
-  if (!user) {
+const checkAuthState = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      unsubscribe(); // Unsubscribe immediately after getting the user state
+      resolve(!!user);
+    });
+  });
+};
+
+const requireAuth = async (to: any, from: any, next: any) => {
+  const isAuthenticated = await checkAuthState();
+  if (!isAuthenticated) {
     next('/login');
   } else {
     next();
   }
-}
+};
+
+const preventAuthAccess = async (to: any, from: any, next: any) => {
+  const isAuthenticated = await checkAuthState();
+  if (isAuthenticated) {
+    next('/home');
+  } else {
+    next();
+  }
+};
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,11 +40,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'Home',
     component: () => import('@/views/HomeScreen.vue'),
+    beforeEnter: requireAuth
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/LogInScreen.vue')
+    component: () => import('@/views/LogInScreen.vue'),
+    beforeEnter: preventAuthAccess
   }
 ]
 
@@ -34,5 +55,6 @@ const router = createRouter({
   routes
 })
 
+export default router;
 
-export default router
+

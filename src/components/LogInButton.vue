@@ -15,7 +15,8 @@ export default defineComponent({
       event.preventDefault(); 
       try {
         await loginWithGoogle();
-        console.log("Login successful");
+        window.location.reload();
+
       } catch (error) {
         console.error("Login failed", error);
       }

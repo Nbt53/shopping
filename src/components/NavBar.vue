@@ -1,25 +1,37 @@
 <template>
   <nav class="nav-bar">
     <ul class="nav-items">
-        <li class="nav-component">Home</li>
-    <li class="nav-component">Settings</li>
-    <li class="nav-component" v-if="isLoggedIn">Logout</li>
-    <li class="nav-component" v-else>Login</li>
+      <li class="nav-component">Home</li>
+      <li class="nav-component">Settings</li>
+      <li class="nav-component" v-if="isLoggedIn">
+        <button @click="handleLogout">Logout</button>
+      </li>
+      <li class="nav-component" v-else>Login</li>
     </ul>
-    
   </nav>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import useIsLoggedIn from "../composables/user/isLoggedIn";
+import useLogout from "../composables/user/LogOut";
 
 export default defineComponent({
   name: "NavBar",
   setup() {
     const { isLoggedIn } = useIsLoggedIn();
-    
-    return {isLoggedIn};
+
+    const handleLogout = async () => {
+      const confirmation = window.confirm("Are you sure you want to logout?");
+      if (confirmation) {
+        const { logout } = useLogout();
+        await logout();
+        alert("Logout successful");
+        window.location.reload();
+      }
+    };
+
+    return { isLoggedIn, handleLogout };
   },
 });
 </script>
@@ -38,5 +50,4 @@ export default defineComponent({
   width: 100%;
   justify-content: space-around;
 }
-
 </style>
