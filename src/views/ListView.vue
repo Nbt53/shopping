@@ -1,20 +1,46 @@
 <template>
-  <div class="list-view"></div>
+  <div v-if="loading">
+    <loading-component />
+  </div>
+  <div class="list-view" v-else-if="documentData">
+    <h1>{{ documentData.title }}</h1>
+  </div>
+  <div v-else>
+    <h1>error {{ error }}</h1>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import LoadingComponent from "@/components/LoadingComponent.vue";
+import getDocument from "@/composables/getDocument";
+import { defineComponent, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 
 export default defineComponent({
+  components: { LoadingComponent },
   name: "ListView",
 
   setup() {
     const route = useRoute();
-    const id = route.params.id;
-    const loading = ref(false);
+    const id: string = route.params.id as string;
+    const documentData = ref<any | null>(null);
+    const error = ref<string | null>(null);
+    const loading = ref<boolean>(true);
+    onMounted(async () => {
+      const { documentData: docData, error: mountError } = await getDocument(
+        "lists",
+        id
+      );
 
-    return { loading };
+      if (mountError.value) {
+        error.value = mountError.value;
+      } else {
+        documentData.value = docData.value;
+        loading.value = false;
+      }
+    });
+
+    return { documentData, error, loading };
   },
 });
 </script>
