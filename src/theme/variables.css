@@ -4,19 +4,33 @@ http://ionicframework.com/docs/theming/ */
 
 /* Colors */
 :root {
-    --color-primary: #E6F8B2;
-    --color-secondary: #CDE77F;
-    --color-tertiary: #709176;;
+    --color-primary: #12355b;
+    --color-secondary: #ffffff;
+    --color-tertiary: #ff570a;
+    --color-dark: #420039;
 
+    --color-error: #D72638;
+    --color-success: #28a745;
+    --color-text: #333333;
+    --color-text-light: #666666;
 
-
-    --color-text: #704E2E;
-    --color-text-light: #79745C;
+    --font-title: "Poppins", sans-serif;
+    --font-text: "EB Garamond", serif;
 }
 
-body{
+body {
     background-color: var(--color-primary);
-    color: var(--color-secondary);
+    color: var(--color-text);
+    font-family: var(--font-text);
+}
+
+h1, h2, h3, h4, h5, h6, button {
+    font-family: var(--font-title);
+    color: var(--color-text);
+}
+/* text */
+.error {
+    color: var(--color-error);
 }
 
 /* ///buttons */
@@ -27,6 +41,6 @@ button {
 
 /* icons */
 ion-icon {
-    font-size: 150px;
-    color: black;
+    font-size: 80px;
+    color: var(--color-text);
 }

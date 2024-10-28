@@ -3,14 +3,14 @@ import { query, orderBy, onSnapshot, collection } from 'firebase/firestore';
 import { db } from "../configs/firebase";
 
 
-const getCollection = (collectionName) => {
-    const error = ref(null);
-    const documents = ref(null);
-    let collectionRef = collection(db, collectionName);
-    let queryRef = query(collectionRef, orderBy('createdAt', 'asc'));
+const getCollection = (collectionName: string) => {
+    const error = ref<string | null>(null);
+    const documents = ref<any[] | null>(null);
+    const collectionRef = collection(db, collectionName);
+    const queryRef = query(collectionRef, orderBy('createdAt', 'asc'));
 
     const unSub = onSnapshot(queryRef, (snap) => {
-        let results = [];
+        const results: any[] = [];
         snap.docs.forEach(doc => {
             doc.data().createdAt && results.push({ ...doc.data(), id: doc.id });
         });

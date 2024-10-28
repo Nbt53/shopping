@@ -47,8 +47,25 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: () => import('@/views/LogInScreen.vue'),
     beforeEnter: preventAuthAccess
+  },
+  {
+    path: '/CreateList',
+    name: 'CreateList',
+    component: () => import('@/views/CreateList.vue'),
+  },
+  {
+    path: '/list/:id',
+    name: 'List',
+    component: () => import('@/views/ListView.vue')
+
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/HomeScreen.vue'),
   }
-]
+];
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
