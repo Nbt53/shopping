@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent} from "vue";
 import { IonSpinner } from "@ionic/vue";
 
 export default defineComponent({
@@ -13,9 +13,7 @@ export default defineComponent({
   components: {
     IonSpinner,
   },
-  setup() {
-    return {};
-  },
+  
 });
 </script>
 

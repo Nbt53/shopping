@@ -3,7 +3,7 @@ import { ListItem } from "@/interfaces/ListTypes";
 
 export const pushToList = (nameValue: string, quantityValue: number, itemsValue: ListItem[]) => {
     const item: ListItem = {
-        name: nameValue.toUpperCase(),
+        name: nameValue,
         quantity: quantityValue,
         purchased: false,
     };

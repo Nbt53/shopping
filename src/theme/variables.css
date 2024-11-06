@@ -18,16 +18,55 @@ http://ionicframework.com/docs/theming/ */
     --font-text: "EB Garamond", serif;
 }
 
+/* utils */
+.u-p-m {
+    padding: 18px;
+}
+
+.u-mb-m {
+    margin-bottom: 18px;
+}
+
+.u-scroll {
+    overflow: scroll;
+    max-height: 350px;
+}
+
+.u-scroll-l {
+    overflow: scroll;
+    height: 710px;
+}
+
 body {
     background-color: var(--color-primary);
     color: var(--color-text);
     font-family: var(--font-text);
 }
 
-h1, h2, h3, h4, h5, h6, button {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
     font-family: var(--font-title);
     color: var(--color-text);
 }
+
+
+h1 {
+    font-size: 16px;
+}
+
+li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+}
+
 /* text */
 .error {
     color: var(--color-error);
@@ -39,8 +78,28 @@ button {
     background-color: green;
 }
 
+.btn-error {
+    background-color: var(--color-error);
+    color: var(--color-secondary);
+}
+
 /* icons */
 ion-icon {
     font-size: 80px;
+    color: var(--color-text);
+}
+
+.addIcon {
+    font-size: 40px;
+    color: var(--color-secondary);
+}
+
+/* inputs */
+input,
+select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--color-text);
+    background-color: var(--color-secondary);
     color: var(--color-text);
 }

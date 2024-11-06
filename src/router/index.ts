@@ -40,7 +40,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'Home',
     component: () => import('@/views/HomeScreen.vue'),
-    beforeEnter: requireAuth
   },
   {
     path: '/login',

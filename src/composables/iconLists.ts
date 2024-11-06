@@ -3,7 +3,7 @@ import { Icons } from "@/interfaces/Icons";
 export const icons: Icons[] = [
     {
         name: "Shopping List",
-        icon: "shopping-cart",
+        icon: "cart-outline",
     },
     {
         name: "To Do List",

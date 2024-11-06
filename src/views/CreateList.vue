@@ -20,20 +20,18 @@
         />
         <button @click="addItem">Add to list</button>
         <div class="create-list">
-          <div class="create-list__headings">
-            <span>Name</span>
-            <span>Quantity</span>
-            <span>Purchased</span>
-            <span>Delete</span>
-          </div>
-          <div class="list-item" v-for="item in items" :key="item.name">
-            <ListItems
-              :name="item.name"
-              :quantity="item.quantity"
-              :purchased="item.purchased"
-              @remove="handleRemove"
-              @togglePurchase="togglePurchase"
-            />
+          
+          <div class="u-scroll">
+            <list-headings />
+            <div class="list-item" v-for="item in items" :key="item.name">
+              <ListItems
+                :name="item.name"
+                :quantity="item.quantity"
+                :purchased="item.purchased"
+                @remove="handleRemove"
+                @togglePurchase="togglePurchase"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -51,11 +49,13 @@ import useCollection from "@/composables/useAddCollection";
 import router from "@/router";
 import { icons } from "@/composables/iconLists";
 import { timestamp } from "@/configs/firebase";
+import ListHeadings from "@/components/ListHeadings.vue";
 
 export default defineComponent({
   name: "CreateList",
   components: {
     ListItems,
+    ListHeadings,
   },
   setup() {
     const title = ref("New List");
@@ -164,14 +164,7 @@ input {
   width: 100%;
 }
 
-.create-list__headings {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px 25px 0 25px;
 
-  border-radius: 10px;
-}
 
 span {
   color: var(--color-secondary);
